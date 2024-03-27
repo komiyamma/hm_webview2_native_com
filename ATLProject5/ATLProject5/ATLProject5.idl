@@ -1,0 +1,63 @@
+﻿// ATLProject5.idl : ATLProject5 の IDL ソース
+//
+
+// このファイルは、タイプ ライブラリ ([!output SAFE_IDL_NAME].tlb) およびマーシャリング コードを
+// タイプ ライブラリ (ATLProject5.tlb) とマーシャリング コードを生成します。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,
+	pointer_default(unique)
+]
+interface IComponentRegistrar : IDispatch
+{
+	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
+	[id(2)]	HRESULT RegisterAll();
+	[id(3)]	HRESULT UnregisterAll();
+	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+};
+
+[
+	object,
+	uuid(f6f0553a-a921-4e70-aa05-476f0cac9cbe),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IBStringClass : IDispatch
+{
+	[propget, id(1)] HRESULT Value([out, retval] BSTR* pVal);
+	[propput, id(1)] HRESULT Value([in] BSTR newVal);
+	[id(2)] HRESULT Append([in] BSTR str, [out, retval] BSTR* result);
+};
+[
+	uuid(d18d9d2f-fdc8-4421-9bfa-061b500acec2),
+	version(1.0),
+	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{00088510-9c7b-440d-b4f5-35bef3e1b971}")
+]
+library ATLProject5Lib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(00088510-9c7b-440d-b4f5-35bef3e1b971)
+	]
+	coclass CompReg
+	{
+		[default] interface IComponentRegistrar;
+	};
+	[
+		uuid(8c88f7b7-be9a-42d9-b499-40d42a9bffff)
+	]
+	coclass BStringClass
+	{
+		[default] interface IBStringClass;
+	};
+};
+
+import "shobjidl.idl";

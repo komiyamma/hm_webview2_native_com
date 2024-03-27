@@ -1,0 +1,7 @@
+﻿jsmode "WebView2";
+js {
+var com = createobject(currentmacrodirectory() + "\\ATLProject5.dll", "{8c88f7b7-be9a-42d9-b499-40d42a9bffff}");
+debuginfo(2);
+com.Append("あいうえ");
+console.log(com.Value);
+}
